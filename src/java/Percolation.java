@@ -1,6 +1,12 @@
+import edu.princeton.cs.algs4.StdRandom;
+import edu.princeton.cs.algs4.StdStats;
+import edu.princeton.cs.algs4.WeightedQuickUnionUF;
+
 public class Percolation {
 
   private final int n;
+  private int numOpenSites;
+  private boolean percolates;
 
   // create n-by-n grid, with all sites blocked
   public Percolation(int n) {
@@ -9,6 +15,8 @@ public class Percolation {
     }
 
     this.n = n;
+    this.numOpenSites = 0;
+    this.percolates = false;
   }
 
   // open site (row, col) if it is not open already
@@ -43,10 +51,14 @@ public class Percolation {
   }
 
   // number of open sites
-  // public int numberOfOpenSites() {}
+  public int numberOfOpenSites() {
+    return numOpenSites;
+  }
 
   // does the system percolate?
-  // public boolean percolates() {}
+  public boolean percolates() {
+    return percolates;
+  }
 
   // test client (optional)
   //  public static void main(String[] args) {
