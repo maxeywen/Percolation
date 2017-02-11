@@ -26,5 +26,31 @@ public class PercolationTest {
     Percolation p = new Percolation(-1);
   }
 
+  /**
+   * throw java.lang.IndexOutOfBoundsException if index out of range
+   */
+  @Test(expected=IndexOutOfBoundsException.class)
+  public void testOpenIndexOutOfRange() {
+    Percolation p = new Percolation(1);
+    p.isOpen(-2,2);
+  }
+
+  /**
+   * throw java.lang.IndexOutOfBoundsException if index out of range
+   */
+  @Test(expected=IndexOutOfBoundsException.class)
+  public void testIsOpenIndexOutOfRange() {
+    Percolation p = new Percolation(1);
+    p.isOpen(2,2);
+  }
+
+  /**
+   * throw java.lang.IndexOutOfBoundsException if index out of range
+   */
+  @Test(expected=IndexOutOfBoundsException.class)
+  public void testIsFullIndexOutOfRange() {
+    Percolation p = new Percolation(1);
+    p.isOpen(2,-2);
+  }
 
 }
