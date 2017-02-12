@@ -25,6 +25,9 @@ public class Percolation {
       throw new IndexOutOfBoundsException();
     }
 
+    numOpenSites += 1;
+    percolates = true;
+
   }
 
 
@@ -34,7 +37,7 @@ public class Percolation {
        throw new IndexOutOfBoundsException();
      }
 
-    return false;
+    return true;
   }
 
   private boolean validSite(int row, int col) {

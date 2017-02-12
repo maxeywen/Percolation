@@ -5,10 +5,10 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
     PercolationConstructorTest.class,
-    PercolationTestNEquals1.class
-    // MySecondClassTest.class
+    PercolationTestNEquals1.class,
+    PercolationTestNEquals1Open.class
     })
 
-public class PercolationTestSuite {
+public class _PercolationTestSuite {
 
 }
