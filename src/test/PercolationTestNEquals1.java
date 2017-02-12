@@ -1,25 +1,11 @@
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 
-public class PercolationTest {
-  /**
-   * The constructor should throw a java.lang.IllegalArgumentException if n <= 0.
-   */
-  @Test(expected=IllegalArgumentException.class)
-  public void testNCantBeLessThan1() {
-    Percolation p = new Percolation(-1);
-  }
-  
-  /**
-   * Test to make sure constructor returns an object
-   */
-  @Test
-  public void testConstructor() {
-    Percolation p = new Percolation(1);
-    assertNotEquals(null, p);
-  }
+public class PercolationTestNEquals1 {
+
 
   /**
    * throw java.lang.IndexOutOfBoundsException if index out of range
@@ -61,6 +47,14 @@ public class PercolationTest {
   public void testInitialDoesNotPercolate() {
     Percolation p = new Percolation(1);
     assertEquals(false, p.percolates());
+  }
+
+  @Ignore
+  @Test
+  public void testOpenSiteisOpen() {
+    Percolation p = new Percolation(1);
+    p.open(1,1);
+    assertEquals(true, p.isOpen(1,1));
   }
 
 }
