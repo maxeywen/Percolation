@@ -1,12 +1,13 @@
-import edu.princeton.cs.algs4.StdRandom;
-import edu.princeton.cs.algs4.StdStats;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
 
   private final int n;
   private int numOpenSites;
+  private boolean[] open;
   private boolean percolates;
+  private WeightedQuickUnionUF ufTop;
+  private WeightedQuickUnionUF ufBottom;
 
   // create n-by-n grid, with all sites blocked
   public Percolation(int n) {
@@ -16,7 +17,11 @@ public class Percolation {
 
     this.n = n;
     this.numOpenSites = 0;
+    this.open = new boolean[n*n+1];
     this.percolates = false;
+
+    this.ufTop = new WeightedQuickUnionUF(n*n+1);
+    this.ufBottom = new WeightedQuickUnionUF(n*n+1);
   }
 
   // open site (row, col) if it is not open already
@@ -24,9 +29,8 @@ public class Percolation {
     if (validSite(row, col)) {
       throw new IndexOutOfBoundsException();
     }
-
     numOpenSites += 1;
-    percolates = true;
+    open[site(row, col)] = true;
 
   }
 
@@ -50,7 +54,16 @@ public class Percolation {
       throw new IndexOutOfBoundsException();
     }
 
-    return true;
+    return (this.isOpen(row, col) && this.openPathToTop(row, col));
+  }
+
+  private boolean openPathToTop(int row, int col) {
+    // int site = site(row, col);
+    return ufTop.connected(site(row, col), 0);
+  }
+
+  private int site(int row, int col) {
+    return ((row-1) * n + col);
   }
 
   // number of open sites
@@ -63,8 +76,21 @@ public class Percolation {
     return percolates;
   }
 
+  private void show() {
+    for (int r=1; r<=n; r++) {
+      for (int c=1; c<=n; c++) {
+        int s = site(r,c);
+        if (open[s]) {System.out.print('X');}
+        else {System.out.print('-');}
+      }
+      System.out.println();
+    }
+  }
+
   // test client (optional)
-  //  public static void main(String[] args) {
-  //    System.out.println("hi");
-  //  }
+  public static void main(String[] args) {
+    Percolation p = new Percolation(3);
+    p.open(1,1);
+    p.show();
+  }
 }

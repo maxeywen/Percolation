@@ -6,7 +6,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
     PercolationConstructorTest.class,
     PercolationTestNEquals1.class,
-    PercolationTestNEquals1Open.class
+    PercolationTestNEquals1Open.class,
+    PercolationTestNEquals3.class
     })
 
 public class _PercolationTestSuite {
