@@ -157,11 +157,11 @@ public class Percolation {
 
   // ==========================================================================
   // test client (optional)
-  // public static void main(String[] args) {
+  public static void main(String[] args) {
     // Percolation p = new Percolation(10);
     // p.open(0, 6);
     // p.open(1,2);
     // p.isOpen(2,2);
     // p.show();
-    // }
+  }
 }

@@ -73,7 +73,7 @@ public class PercolationStats {
   }
 
   // test client (described below)
-  // public static void main(String[] args) {
+  public static void main(String[] args) {
   //  PercolationStats ps = new PercolationStats(10,10);
-  // }
+  }
 }
