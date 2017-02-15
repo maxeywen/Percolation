@@ -51,40 +51,43 @@ public class Percolation {
     if (validSite(row, col)) {
       throw new IndexOutOfBoundsException();
     }
-    open[site(row, col)] = true;
-    numOpenSites += 1;
 
-    int s0 = site(row, col);
+    if (!isOpen(row, col)) {
+      open[site(row, col)] = true;
+      numOpenSites += 1;
 
-    int s1;
-    s1 = site(row-1, col);  // up
-    if (open[s1]) {
-      ufTop.union(s0, s1);
-      ufBottom.union(s0, s1);
-    }
+      int s0 = site(row, col);
 
-    s1 = site(row+1, col); // down
-    if (open[s1]) {
-      ufTop.union(s0, s1);
-      ufBottom.union(s0, s1);
-    }
+      int s1;
+      s1 = site(row - 1, col);  // up
+      if (open[s1]) {
+        ufTop.union(s0, s1);
+        ufBottom.union(s0, s1);
+      }
 
-    s1 = site(row, col+1); // right
-    if (open[s1]) {
-      ufTop.union(s0, s1);
-      ufBottom.union(s0, s1);
-    }
+      s1 = site(row + 1, col); // down
+      if (open[s1]) {
+        ufTop.union(s0, s1);
+        ufBottom.union(s0, s1);
+      }
 
-    s1 = site(row, col-1); // left
-    if (open[s1]) {
-      ufTop.union(s0, s1);
-      ufBottom.union(s0, s1);
-    }
+      s1 = site(row, col + 1); // right
+      if (open[s1]) {
+        ufTop.union(s0, s1);
+        ufBottom.union(s0, s1);
+      }
 
-    // check for percolation
-    if (openPathToTop(row, col)) {
-      if(ufBottom.connected(s0, BOTTOM)) {
-        percolates = true;
+      s1 = site(row, col - 1); // left
+      if (open[s1]) {
+        ufTop.union(s0, s1);
+        ufBottom.union(s0, s1);
+      }
+
+      // check for percolation
+      if (openPathToTop(row, col)) {
+        if (ufBottom.connected(s0, BOTTOM)) {
+          percolates = true;
+        }
       }
     }
   }

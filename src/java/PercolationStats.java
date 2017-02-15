@@ -3,9 +3,9 @@ import edu.princeton.cs.algs4.StdStats;
 
 public class PercolationStats {
 
-  int n;
-  int numTrials;
-  double[] results;
+  private final int n;
+  private final int numTrials;
+  private double[] results;
   private double mean;
 
   // perform trials independent experiments on an n-by-n grid
@@ -21,11 +21,13 @@ public class PercolationStats {
     results = new double[numTrials];
 
     for (int trial = 0; trial < numTrials; trial++) {
-      double x = StdRandom.uniform(0.50, 0.70);
-      results[trial] = x;
-      System.out.println(x);
+      results[trial] = runTrial();
     }
 
+    printResults();
+  }
+
+  private void printResults() {
     mean = mean();
     System.out.println("mean                    = " + mean);
     double stddev = stddev();
@@ -34,6 +36,21 @@ public class PercolationStats {
     double x1 = confidenceLo();
     double x2 = confidenceHi();
     System.out.println("95% confidence interval = [" + x1 + ", " + x2 + "]");
+  }
+
+  private double runTrial() {
+
+    Percolation p = new Percolation(n);
+    while (!p.percolates()) {
+      int rand1 = StdRandom.uniform(1, n + 1);
+      int rand2 = StdRandom.uniform(1, n + 1);
+      p.open(rand1, rand2);
+    }
+
+    double x = 1.0 * p.numberOfOpenSites() / (n * n);
+
+    // System.out.println(x);
+    return x;
   }
 
   // sample mean of percolation threshold
@@ -56,6 +73,6 @@ public class PercolationStats {
 
   // test client (described below)
   public static void main(String[] args) {
-    PercolationStats ps = new PercolationStats(200,100);
+    PercolationStats ps = new PercolationStats(10,10);
   }
 }
