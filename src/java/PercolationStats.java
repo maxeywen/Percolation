@@ -13,7 +13,7 @@ public class PercolationStats {
   public PercolationStats(int n, int trials) {
     // The constructor should throw a java.lang.IllegalArgumentException if
     // either n ≤ 0 or trials ≤ 0
-    if (n <= 0 || trials < 0) {
+    if (n <= 0 || trials <= 0) {
       throw new IllegalArgumentException();
     }
 
