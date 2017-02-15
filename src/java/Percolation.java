@@ -31,7 +31,7 @@ public class Percolation {
     this.ufBottom = new WeightedQuickUnionUF(N+1);
     BOTTOM = N;
 
-    for (int row = 0; row <= n+1; row+=(n+1)) {
+    for (int row = 0; row <= n+1; row += (n+1)) {
       for (int col = 1; col <= n; col++) {
         int s = site(row, col);
         this.open[s] = true;
@@ -48,15 +48,15 @@ public class Percolation {
   // ==========================================================================
   // open site (row, col) if it is not open already
   public void open(int row, int col) {
-    if (validSite(row, col)) {
+    if (!validSite(row, col)) {
       throw new IndexOutOfBoundsException();
     }
 
     if (!isOpen(row, col)) {
-      open[site(row, col)] = true;
-      numOpenSites += 1;
-
       int s0 = site(row, col);
+
+      open[s0] = true;
+      numOpenSites += 1;
 
       int s1;
       s1 = site(row - 1, col);  // up
@@ -95,7 +95,7 @@ public class Percolation {
   // ==========================================================================
   // is site (row, col) open?
    public boolean isOpen(int row, int col) {
-     if (validSite(row, col)) {
+     if (!validSite(row, col)) {
        throw new IndexOutOfBoundsException();
      }
     return open[site(row, col)];
@@ -103,13 +103,13 @@ public class Percolation {
 
   // ==========================================================================
   private boolean validSite(int row, int col) {
-    return row < 0 || row > n || col < 0 || col > n;
+    return (row >= 1 && row <= n && col >= 1 && col <= n);
   }
 
   // ==========================================================================
   // is site (row, col) full?
   public boolean isFull(int row, int col) {
-    if (validSite(row, col)) {
+    if (!validSite(row, col)) {
       throw new IndexOutOfBoundsException();
     }
 
@@ -140,28 +140,28 @@ public class Percolation {
   }
 
   // ==========================================================================
-  private void show() {
-    for (int r=0; r<=n+1; r++) {
-      for (int c=0; c<=n+1; c++) {
-        int s = site(r,c);
-        if (open[s]) {
-          if (isFull(r,c)) System.out.print('+');
-          else System.out.print('-');
-        }
-        else {System.out.print('X');}
-        //{System.out.print(s + "\t");}
-      }
-      System.out.println();
-    }
-  }
+//  private void show() {
+//    for (int r=0; r<=n+1; r++) {
+//      for (int c=0; c<=n+1; c++) {
+//        int s = site(r,c);
+//        if (open[s]) {
+//          if (isFull(r,c)) System.out.print('+');
+//          else System.out.print('-');
+//        }
+//        else {System.out.print('X');}
+//        //{System.out.print(s + "\t");}
+//      }
+//      System.out.println();
+//    }
+//  }
 
   // ==========================================================================
   // test client (optional)
-  // public static void main(String[] args) {
-    // Percolation p = new Percolation(1);
-    //p.open(2,1);
+  public static void main(String[] args) {
+    Percolation p = new Percolation(10);
+    p.open(0,6);
     //p.open(1,2);
-    // p.isOpen(2,2);
+    //p.isOpen(2,2);
     // p.show();
-  // }
+    }
 }
