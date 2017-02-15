@@ -24,8 +24,6 @@ public class PercolationStats {
     for (int trial = 0; trial < numTrials; trial++) {
       results[trial] = runTrial();
     }
-
-    printResults();
   }
 
   private void printResults() {
@@ -74,6 +72,7 @@ public class PercolationStats {
 
   // test client (described below)
   public static void main(String[] args) {
-  //  PercolationStats ps = new PercolationStats(10,10);
+    PercolationStats ps = new PercolationStats(10,10);
+    ps.printResults();
   }
 }
