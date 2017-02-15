@@ -8,8 +8,8 @@ public class Percolation {
   private boolean percolates;
   private WeightedQuickUnionUF ufTop;
   private WeightedQuickUnionUF ufBottom;
-  private final int TOP;
-  private final int BOTTOM;
+  private final int topNode;
+  private final int bottomNode;
 
   // ==========================================================================
   // create n-by-n grid, with all sites blocked
@@ -22,24 +22,24 @@ public class Percolation {
     this.numOpenSites = 0;
     this.percolates = false;
 
-    int N = (n+2) * (n+2);
-    this.open = new boolean[N];
+    int paddedN = (n+2) * (n+2);
+    this.open = new boolean[paddedN];
 
-    this.ufTop = new WeightedQuickUnionUF(N+1);
-    TOP = N;
+    this.ufTop = new WeightedQuickUnionUF(paddedN+1);
+    topNode = paddedN;
 
-    this.ufBottom = new WeightedQuickUnionUF(N+1);
-    BOTTOM = N;
+    this.ufBottom = new WeightedQuickUnionUF(paddedN+1);
+    bottomNode = paddedN;
 
     for (int row = 0; row <= n+1; row += (n+1)) {
       for (int col = 1; col <= n; col++) {
         int s = site(row, col);
         this.open[s] = true;
         if (row == 0) {
-          ufTop.union(s, TOP);
+          ufTop.union(s, topNode);
         }
         if (row == n+1) {
-          ufBottom.union(s, BOTTOM);
+          ufBottom.union(s, bottomNode);
         }
       }
     }
@@ -85,7 +85,7 @@ public class Percolation {
 
       // check for percolation
       if (openPathToTop(row, col)) {
-        if (ufBottom.connected(s0, BOTTOM)) {
+        if (ufBottom.connected(s0, bottomNode)) {
           percolates = true;
         }
       }
@@ -119,7 +119,7 @@ public class Percolation {
   // ==========================================================================
   private boolean openPathToTop(int row, int col) {
     // int site = site(row, col);
-    return ufTop.connected(site(row, col), TOP);
+    return ufTop.connected(site(row, col), topNode);
   }
 
   // ==========================================================================
@@ -157,11 +157,11 @@ public class Percolation {
 
   // ==========================================================================
   // test client (optional)
-  public static void main(String[] args) {
-    Percolation p = new Percolation(10);
-    p.open(0,6);
-    //p.open(1,2);
-    //p.isOpen(2,2);
+  // public static void main(String[] args) {
+    // Percolation p = new Percolation(10);
+    // p.open(0, 6);
+    // p.open(1,2);
+    // p.isOpen(2,2);
     // p.show();
-    }
+    // }
 }
