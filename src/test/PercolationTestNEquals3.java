@@ -8,14 +8,15 @@ import static org.junit.Assert.*;
 public class PercolationTestNEquals3 {
 
   private Percolation p;
+  private int n = 3;
 
   /**
    * Create object with n=1 and open it
    */
   @Before
   public void createObject() {
-    p = new Percolation(3);
-    p.open(2,1);
+    p = new Percolation(n);
+    p.open(2,2);
   }
 
   @After
@@ -25,7 +26,7 @@ public class PercolationTestNEquals3 {
 
   @Test
   public void testIsOpen() {
-    assertTrue(p.isOpen(2,1));
+    assertTrue(p.isOpen(2,2));
   }
 
   @Test
@@ -33,11 +34,17 @@ public class PercolationTestNEquals3 {
 
   @Test
   public void testIsFull() {
-    assertFalse(p.isFull(2,1));
+    assertFalse(p.isFull(2,2));
   }
 
   @Test
   public void testPercolates() { assertFalse(p.percolates()); }
+
+  @Test
+  public void testFullAfterOpeningTopSite() {
+    p.open(1,2);
+    assertTrue(p.isFull(2,2));
+  }
 
 
 

@@ -28,13 +28,13 @@ public class PercolationTestNEquals1Open {
   }
 
   @Test
-  public void testIsFull() {
-    assertTrue(p.isFull(1,1));
+  public void testNumberOpenSites() {
+    assertEquals(1, p.numberOfOpenSites());
   }
 
   @Test
-  public void testNumberOpenSites() {
-    assertEquals(1, p.numberOfOpenSites());
+  public void testIsFull() {
+    assertTrue(p.isFull(1,1));
   }
 
   @Test
