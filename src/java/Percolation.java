@@ -100,7 +100,7 @@ public class Percolation {
 
   // ==========================================================================
   private boolean validSite(int row, int col) {
-    return row < 0 || row > n + 1 || col < 0 || col > n + 1;
+    return row < 0 || row > n || col < 0 || col > n;
   }
 
   // ==========================================================================
@@ -154,10 +154,11 @@ public class Percolation {
 
   // ==========================================================================
   // test client (optional)
-  public static void main(String[] args) {
-    Percolation p = new Percolation(1);
-    // p.open(1,1);
-    // p.open(5,5);
-    p.show();
-  }
+  // public static void main(String[] args) {
+    // Percolation p = new Percolation(1);
+    //p.open(2,1);
+    //p.open(1,2);
+    // p.isOpen(2,2);
+    // p.show();
+  // }
 }
